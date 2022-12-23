@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Loading glTF files</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script type="text/javascript" src="./lib/gl-matrix-min.js"></script>
+    <script type="module" src="main.js"></script>
+</head>
+<body>
+    <style>
+        #timer {
+            position: absolute;
+            top: 5%;
+            left: 47%;
+            display: block;
+            overflow: hidden;
+            border: 0;
+        }
+    </style>
+    <div class="fullscreen no-touch">
+        <canvas></canvas>
+    </div>
+    <div class="fullscreen overlay loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <div id="stack0">
+        <div id='stack'>
+           
+            <canvas id='timer'></canvas>
+        </div>
+    </div>
+</body>
+</html>
