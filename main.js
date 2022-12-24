@@ -4,7 +4,8 @@ import { GLTFLoader } from './GLTFLoader.js';
 import { Renderer } from './Renderer.js';
 import { FirstPersonController } from './FirstPersonController.js';
 import Timer from './Timer.js';
-import Stars from './Stars.js';
+import Coins from './Coins.js';
+import Meteors from './Meteors.js';
 
 const mat4 = glMatrix.mat4;
 const vec3 = glMatrix.vec3;
@@ -25,13 +26,16 @@ class App extends Application {
         if (!this.camera.camera) {
             throw new Error('Camera node does not contain a camera reference');
         }   
-        this.stars = new Stars();
-        await this.stars.build(this.loader,  this.scene);
+        this.coins = new Coins();
+        await this.coins.build(this.loader,  this.scene);
+
+        this.meteors = new Meteors();
+        await this.meteors.build(this.loader,  this.scene);
 
     
        
         // await this.loader.load('./blender/newmer1a.gltf');
-        Object.assign(this.camera, {
+        Object.assign(this.camera, { //2
             translation     :vec3.set(vec3.create(), 0, 2, 0),
             fov             : 1.5,
             maxFov          : 1.8,
@@ -51,7 +55,7 @@ class App extends Application {
         Object.assign(this.plane, {
             projection       : mat4.create(),
             rotation         : quat.fromEuler(quat.create(), 0, 0, 0),
-            translation      : vec3.set(vec3.create(), 720, 400, 1000),
+            translation      : vec3.set(vec3.create(), -200, 400, 1000),
             velocity         : vec3.set(vec3.create(), 0, 0, 0),
             mouseSensitivity : 0.002,
             heading          : 0,

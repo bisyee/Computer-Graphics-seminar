@@ -9,8 +9,8 @@ export class FirstPersonController {
 
         this.keys = {};
 
-        this.pitch = 1.5;
-        this.yaw = -9;
+        this.pitch = 1.7;
+        this.yaw = -9.8;
 
         this.velocity = [0, 0, 0];
         this.acceleration = 200;
@@ -59,11 +59,11 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
-            this.yaw -=0.002;
+            this.yaw -=0.01;
         }
         if (this.keys['KeyA']) {
             vec3.sub(acc, acc, right);
-            this.yaw +=0.002;
+            this.yaw +=0.01;
         }
         
 
