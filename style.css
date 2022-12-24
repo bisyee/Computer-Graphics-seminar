@@ -65,3 +65,40 @@ a.back:hover {
     0% { transform: rotate(0deg); }
   100% { transform: rotate(1800deg); }
 }
+
+#fuel {
+    width: 20%;
+    background-color: grey;
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
+  }
+
+#life {
+    width: 20%;
+    background-color: grey;
+    position: absolute;
+    top: 8px;
+    left: 75%;
+    font-size: 18px;
+}
+
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: blue;
+}
+#lifebar {
+    width: 1%;
+    height: 30px;
+    background-color: blue;
+}
+#timer {
+    position: absolute;
+    top: 5%;
+    left: 47%;
+    display: block;
+    overflow: hidden;
+    border: 0;
+}

@@ -6,6 +6,7 @@ import { FirstPersonController } from './FirstPersonController.js';
 import Timer from './Timer.js';
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
+import Fuel from './Fuel.js';
 
 const mat4 = glMatrix.mat4;
 const vec3 = glMatrix.vec3;
@@ -70,7 +71,8 @@ class App extends Application {
         
         this.scene.addNode(this.plane);
         this.scene.addNode(this.camera);
-
+        this.fuel= new Fuel();
+        this.fuel.subFuel();
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas);
    
@@ -84,6 +86,8 @@ class App extends Application {
 
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
+
+        
         
     }
 
