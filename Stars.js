@@ -9,7 +9,7 @@ export default class Stars {
         await loader.load('./blender/star.gltf');
         let tree = await loader.loadNode(loader.defaultScene);
         tree.translation = vec3.set(vec3.create(), 720, 200, 900);
-        tree.scale = vec3.set(vec3.create(), 3, 3, 3);
+        tree.scale = vec3.set(vec3.create(), 1, 1, 1);
         this.trees.push(tree);
         // console.log(this.gl.canvas);
         this.add(scene);

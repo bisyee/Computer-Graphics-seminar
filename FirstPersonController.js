@@ -3,6 +3,7 @@ import { quat, vec3, mat4 } from './lib/gl-matrix-module.js';
 export class FirstPersonController {
 
     constructor(node, domElement) {
+
         this.node = node;
         this.domElement = domElement;
 
@@ -12,7 +13,7 @@ export class FirstPersonController {
         this.yaw = -9;
 
         this.velocity = [0, 0, 0];
-        this.acceleration = 250;
+        this.acceleration = 200;
         this.maxSpeed = 3000;
         this.decay = 0.9;
         this.pointerSensitivity = 0.002;
@@ -58,10 +59,14 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
+            this.yaw -=0.002;
         }
         if (this.keys['KeyA']) {
             vec3.sub(acc, acc, right);
+            this.yaw +=0.002;
         }
+        
+
 
         // Update velocity based on acceleration.
         vec3.scaleAndAdd(this.velocity, this.velocity, acc, dt * this.acceleration);

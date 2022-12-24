@@ -29,15 +29,29 @@ class App extends Application {
         await this.stars.build(this.loader,  this.scene);
 
     
-        
+       
         // await this.loader.load('./blender/newmer1a.gltf');
+        Object.assign(this.camera, {
+            translation     :vec3.set(vec3.create(), 0, 2, 0),
+            fov             : 1.5,
+            maxFov          : 1.8,
+            minFov          : 1,
+            maxTranslation  : 7,
+            yaw             : 0,
+            pitch           : 0,
+            roll            : 0,
+            distanceFromPlane : 50,
+            zoom            : -20,
+            offset          : 0,
+            angle           : 0
+        });
 
     
 
         Object.assign(this.plane, {
             projection       : mat4.create(),
             rotation         : quat.fromEuler(quat.create(), 0, 0, 0),
-            translation      : vec3.set(vec3.create(), 720, 200, 900),
+            translation      : vec3.set(vec3.create(), 720, 400, 1000),
             velocity         : vec3.set(vec3.create(), 0, 0, 0),
             mouseSensitivity : 0.002,
             heading          : 0,
@@ -55,6 +69,7 @@ class App extends Application {
 
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas);
+   
       
 
 
@@ -79,7 +94,7 @@ class App extends Application {
     update(time, dt){
         this.controller.update(dt);
         this.timer = new Timer();
-         console.log(this.plane);
+     
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');
         // }
