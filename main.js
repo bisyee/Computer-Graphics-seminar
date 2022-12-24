@@ -3,7 +3,6 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { Renderer } from './Renderer.js';
 import { FirstPersonController } from './FirstPersonController.js';
-import Timer from './Timer.js';
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
@@ -101,7 +100,6 @@ class App extends Application {
     }
     update(time, dt){
         this.controller.update(dt);
-        this.timer = new Timer();
      
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');
