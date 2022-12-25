@@ -1,22 +1,14 @@
 export default class Life{
-
+    constructor() {
+        this.width = 1;
+      }
     subLife(){
-        var i = 0;
-        if (i == 0) {
-            i = 1;
-            var elem = document.getElementById("myBar");
-            var width = 1;
-            var id = setInterval(frame, 1000);
-            function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
-            }
+        var elem = document.getElementById("lifeBar");
+        if (this.width >= 100) {
+            clearInterval(id);
+        } else {
+            this.width+=10;
+            elem.style.width = this.width + "%";
         }
     }
-
 }

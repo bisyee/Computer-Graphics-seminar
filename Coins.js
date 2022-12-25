@@ -47,7 +47,7 @@ export default class Stars {
 
         await loader.load('./blender/coin/coin.gltf');
         coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 300, 400, 800);
+        coin.translation = vec3.set(vec3.create(), 300, 400, 0);
         coin.scale = vec3.set(vec3.create(), 20, 3, 20);
         this.coins.push(coin);
 
@@ -68,4 +68,23 @@ export default class Stars {
         }
     }
 
+    collision(object) {
+        // let collided = false;
+        // for (let i=0; i<this.coins.length; i++) {
+        //     console.log(object.translation[0] < this.coins[i].translation[0]+50 , 
+        //         object.translation[0] > this.coins[i].translation[0]-50, 
+        //         object.translation[2] < this.coins[i].translation[2]+50, 
+        //         object.translation[2] > this.coins[i].translation[2]-50)
+        //     if ((object.translation[0] < this.coins[i].translation[0]+100 && 
+        //         object.translation[0] > this.coins[i].translation[0]-100 && 
+        //         object.translation[2] < this.coins[i].translation[2]+100 && 
+        //         object.translation[2] > this.coins[i].translation[2]-100)) {
+        //             console.log('hit'); 
+        //        collided = true;
+        //     //    this.coins.splice(i, 1); 
+        //     }
+           
+            
+        // }
+    }
 }

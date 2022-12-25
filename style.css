@@ -75,22 +75,22 @@ a.back:hover {
     font-size: 18px;
   }
 
-/* #life {
+#life {
     width: 20%;
     background-color: grey;
     position: absolute;
     top: 8px;
     left: 75%;
     font-size: 18px;
-} */
+}
 
 #myBar {
     width: 1%;
     height: 30px;
     background-color: blue;
 }
-/* #lifebar {
+#lifeBar {
     width: 1%;
     height: 30px;
     background-color: blue;
-} */
+}

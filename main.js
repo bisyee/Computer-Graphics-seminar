@@ -6,6 +6,9 @@ import { FirstPersonController } from './FirstPersonController.js';
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
+import Life from './Life.js';
+
+
 
 const mat4 = glMatrix.mat4;
 const vec3 = glMatrix.vec3;
@@ -31,6 +34,11 @@ class App extends Application {
 
         this.meteors = new Meteors();
         await this.meteors.build(this.loader,  this.scene);
+
+        this.life = new Life();
+
+        
+       
 
     
        
@@ -100,12 +108,42 @@ class App extends Application {
     }
     update(time, dt){
         this.controller.update(dt);
-     
+        this.coins.collision(this.plane);
+        let angles = this.getEuler(this.plane.rotation);
+        var collided = this.meteors.collision(this.plane,angles);
+        console.log(collided, 'collided');
+        if (collided){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
+            this.life.subLife();
+        }
+
+        
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');
         // }
 
     }
+
+    getEuler(q) {
+        let vector = vec3.create();
+        let x = q[0];
+        let y = q[1];
+        let z = q[2];
+        let w = q[3];
+        let x2 = x*x;
+        let y2 = y*y;
+        let z2 = z*z;
+        let w2 = w*w;
+        vector[0] = Math.asin(-2*(y*z+w*x));
+        if (Math.cos(vector[0]!=0)) {
+            vector[1] = Math.atan2(2*x*z-2*w*y, 1-2*x2-2*y2)
+            vector[2] = Math.atan2(x*y-w*z, 1/2-x2-z2);
+        } else {
+            vector[1] = Math.atan2(-x*z-w*y, 1/2-y2-z2)
+            vector[2] = 0;
+        }
+        return vector;
+     }
 
 }
 

@@ -1,4 +1,5 @@
 import { quat, vec3, mat4 } from './lib/gl-matrix-module.js';
+import Meteors from './Meteors.js';
 
 export class FirstPersonController {
 
@@ -13,7 +14,7 @@ export class FirstPersonController {
         this.yaw = -9.8;
 
         this.velocity = [0, 0, 0];
-        this.acceleration = 200;
+        this.acceleration = 600;
         this.maxSpeed = 3000;
         this.decay = 0.9;
         this.pointerSensitivity = 0.002;
@@ -43,6 +44,7 @@ export class FirstPersonController {
     }
 
     update(dt) {
+       
         // Calculate forward and right vectors.
         const cos = Math.cos(this.yaw);
         const sin = Math.sin(this.yaw);
@@ -65,7 +67,8 @@ export class FirstPersonController {
             vec3.sub(acc, acc, right);
             this.yaw +=0.01;
         }
-        
+       
+     
 
 
         // Update velocity based on acceleration.
@@ -96,8 +99,11 @@ export class FirstPersonController {
         quat.rotateY(rotation, rotation, this.yaw);
         quat.rotateX(rotation, rotation, this.pitch);
         this.node.rotation = rotation;
-    }
 
+      
+        
+    }
+    	32
     pointermoveHandler(e) {
         const dx = e.movementX;
         const dy = e.movementY;

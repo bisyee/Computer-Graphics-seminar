@@ -47,4 +47,24 @@ export default class Meteors {
         }
     }
 
+    collision(object) {
+        let collided = false;
+        for (let i=0; i<this.meteors.length; i++) {
+            if ((object.translation[0] < this.meteors[i].translation[0]+30 && 
+                object.translation[0] > this.meteors[i].translation[0]-30 && 
+                object.translation[2] < this.meteors[i].translation[2]+30 && 
+                object.translation[2] > this.meteors[i].translation[2]-30)) {
+                console.log('hit'); 
+               
+                
+                // vec3.sub(object.translation, object.translation, vec3.set(vec3.create(), Math.sin(angles[1])*0.0005, 0, -Math.cos(angles[1])*0.0005));
+                // object.translation( vec3.set(vec3.create(), -200, 400, 1000));
+                collided= true;
+            //    this.meteors.splice(i, 1); 
+            }          
+            
+        }
+        return collided;
+    }
+
 }
