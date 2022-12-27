@@ -3,7 +3,7 @@ export class Application {
     constructor(canvas, glOptions) {
         this._update = this._update.bind(this);
         this._render = this._render.bind(this);
-
+        this.checkpoints = 0;
         this.gl = canvas.getContext('webgl2', glOptions);
     }
 

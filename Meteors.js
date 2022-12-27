@@ -54,7 +54,7 @@ export default class Meteors {
                 object.translation[0] > this.meteors[i].translation[0]-30 && 
                 object.translation[2] < this.meteors[i].translation[2]+30 && 
                 object.translation[2] > this.meteors[i].translation[2]-30)) {
-                console.log('hit'); 
+                // console.log('hit'); 
                
                 
                 // vec3.sub(object.translation, object.translation, vec3.set(vec3.create(), Math.sin(angles[1])*0.0005, 0, -Math.cos(angles[1])*0.0005));

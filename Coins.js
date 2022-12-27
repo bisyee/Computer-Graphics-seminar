@@ -1,8 +1,10 @@
 const vec3 = glMatrix.vec3;
 
-export default class Stars {
+export default class Coins {
      constructor() {   
         this.coins = [];
+        this.coinsNum = 0;
+        
     }
 
     async build(loader, scene) {
@@ -16,6 +18,7 @@ export default class Stars {
         await loader.load('./blender/coin/coin.gltf');
         coin = await loader.loadNode(loader.defaultScene);
         coin.translation = vec3.set(vec3.create(), 0, 400, 0);
+        // coin.rotation = vec3.set(vec3.create(), 1, 0, 0);
         coin.scale = vec3.set(vec3.create(), 20, 3, 20);
         this.coins.push(coin);
         this.add(scene);
@@ -68,23 +71,29 @@ export default class Stars {
         }
     }
 
-    collision(object) {
-        // let collided = false;
-        // for (let i=0; i<this.coins.length; i++) {
-        //     console.log(object.translation[0] < this.coins[i].translation[0]+50 , 
-        //         object.translation[0] > this.coins[i].translation[0]-50, 
-        //         object.translation[2] < this.coins[i].translation[2]+50, 
-        //         object.translation[2] > this.coins[i].translation[2]-50)
-        //     if ((object.translation[0] < this.coins[i].translation[0]+100 && 
-        //         object.translation[0] > this.coins[i].translation[0]-100 && 
-        //         object.translation[2] < this.coins[i].translation[2]+100 && 
-        //         object.translation[2] > this.coins[i].translation[2]-100)) {
-        //             console.log('hit'); 
-        //        collided = true;
-        //     //    this.coins.splice(i, 1); 
-        //     }
-           
+    collisionCoins(object) {
+        var collided = false;
+        
+        for (let i=0; i<this.coins.length; i++) {
+            // console.log(object.translation)
+            // console.log(this.coins[i])
+            if (object.translation[0] < this.coins[i].translation[0]+20 && 
+                object.translation[0] > -20 + this.coins[i].translation[0] && 
+                object.translation[2] < this.coins[i].translation[2]+20 && 
+                object.translation[2] > -20 + this.coins[i].translation[2]) {
+                console.log('hit'); 
+                // this.coins.splice(i, 1); 
+                collided = true;
+                this.coinsNum+=1;
+                console.log(this.coinsNum);
+                return true;
+                
+                // vec3.sub(object.translation, object.translation, vec3.set(vec3.create(), Math.sin(angles[1])*0.0005, 0, -Math.cos(angles[1])*0.0005));
+                // object.translation( vec3.set(vec3.create(), -200, 400, 1000));
+            //    this.coins.splice(i, 1); 
+            }          
             
-        // }
+        }
+        return collided;
     }
 }

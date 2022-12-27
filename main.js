@@ -10,15 +10,16 @@ import Life from './Life.js';
 
 
 
+
+
 const mat4 = glMatrix.mat4;
 const vec3 = glMatrix.vec3;
 const quat = glMatrix.quat;
 
 class App extends Application {
-
     async start() {
         this.loader = new GLTFLoader();
-        await this.loader.load('./blender/map/untitled.gltf');
+        await this.loader.load('./blender/newtry/untitled.gltf');
 
         this.scene = await this.loader.loadScene(this.loader.defaultScene);
         this.camera = await this.loader.loadNode('Camera_Orientation');
@@ -29,6 +30,7 @@ class App extends Application {
         if (!this.camera.camera) {
             throw new Error('Camera node does not contain a camera reference');
         }   
+
         this.coins = new Coins();
         await this.coins.build(this.loader,  this.scene);
 
@@ -36,6 +38,7 @@ class App extends Application {
         await this.meteors.build(this.loader,  this.scene);
 
         this.life = new Life();
+      
 
         
        
@@ -81,11 +84,7 @@ class App extends Application {
         this.fuel= new Fuel();
         this.fuel.subFuel();
        
-        this.controller= new FirstPersonController(this.plane,this.gl.canvas);
-   
-      
-
-
+        this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
         this.startTime = this.time;
         // this.angle = this.plane.pitch;
@@ -108,15 +107,18 @@ class App extends Application {
     }
     update(time, dt){
         this.controller.update(dt);
-        this.coins.collision(this.plane);
+        var collidedCoins = this.coins.collisionCoins(this.plane);
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane,angles);
-        console.log(collided, 'collided');
+        
         if (collided){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
             this.life.subLife();
         }
-
+        if(collidedCoins){
+            this.checkpoints +=1;
+            console.log(this.checkpoints);
+        }
         
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');

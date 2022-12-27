@@ -5,7 +5,7 @@ export default class Life{
     subLife(){
         var elem = document.getElementById("lifeBar");
         if (this.width >= 100) {
-            clearInterval(id);
+            console.log('endgame');
         } else {
             this.width+=10;
             elem.style.width = this.width + "%";
