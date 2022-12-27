@@ -71,7 +71,7 @@ export default class Coins {
         }
     }
 
-    collisionCoins(object) {
+    collisionCoins(object, scene) {
         var collided = false;
         
         for (let i=0; i<this.coins.length; i++) {
@@ -82,10 +82,15 @@ export default class Coins {
                 object.translation[2] < this.coins[i].translation[2]+20 && 
                 object.translation[2] > -20 + this.coins[i].translation[2]) {
                 console.log('hit'); 
-                // this.coins.splice(i, 1); 
+                scene.removeNode(this.coins[i]);
+
+                console.log(this.coins[i]);
+
+
+                this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
-                console.log(this.coinsNum);
+                //console.log(this.coinsNum);
                 return true;
                 
                 // vec3.sub(object.translation, object.translation, vec3.set(vec3.create(), Math.sin(angles[1])*0.0005, 0, -Math.cos(angles[1])*0.0005));
