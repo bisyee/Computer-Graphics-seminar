@@ -195,6 +195,8 @@ export class Renderer {
         gl.useProgram(program);
 
         const mvpMatrix = this.getViewProjectionMatrix(camera);
+
+       
         for (const node of scene.nodes) {
             this.renderNode(node, mvpMatrix);
         }

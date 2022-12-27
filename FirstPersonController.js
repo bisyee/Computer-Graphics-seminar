@@ -1,18 +1,20 @@
-import { quat, vec3, mat4 } from './lib/gl-matrix-module.js';
+import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
+import Meteors from './Meteors.js';
 
 export class FirstPersonController {
 
-    constructor(node, domElement) {
+    constructor(node, domElement,camera) {
+        this.camera=camera;
         this.node = node;
         this.domElement = domElement;
 
         this.keys = {};
 
-        this.pitch = 1.5;
-        this.yaw = -9;
+        this.pitch = 1.7;
+        this.yaw = -9.8;
 
         this.velocity = [0, 0, 0];
-        this.acceleration = 250;
+        this.acceleration = 600;
         this.maxSpeed = 3000;
         this.decay = 0.9;
         this.pointerSensitivity = 0.002;
@@ -42,6 +44,7 @@ export class FirstPersonController {
     }
 
     update(dt) {
+        
         // Calculate forward and right vectors.
         const cos = Math.cos(this.yaw);
         const sin = Math.sin(this.yaw);
@@ -58,10 +61,29 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
+            this.yaw -=0.01;
         }
         if (this.keys['KeyA']) {
             vec3.sub(acc, acc, right);
+            this.yaw +=0.01;
         }
+        if(this.keys['ArrowDown']){
+            this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 360 * dt * 0.003139865044, this.camera.translation[2]);
+        }
+
+        if(this.keys['ArrowUp']){
+            this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] -360 * dt * 0.003139865044, this.camera.translation[2]);
+        }
+        if(this.keys['ArrowRight']){
+            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] - 0.00002 , this.camera.rotation[1] - 0.0002, this.camera.rotation[2] ,  this.camera.rotation[3]);
+        }
+        if(this.keys['ArrowLeft']){
+            
+            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] + 0.00002, this.camera.rotation[1]+0.0002, this.camera.rotation[2],  this.camera.rotation[3] );
+        }
+       
+     
+
 
         // Update velocity based on acceleration.
         vec3.scaleAndAdd(this.velocity, this.velocity, acc, dt * this.acceleration);
@@ -91,8 +113,11 @@ export class FirstPersonController {
         quat.rotateY(rotation, rotation, this.yaw);
         quat.rotateX(rotation, rotation, this.pitch);
         this.node.rotation = rotation;
-    }
 
+      
+        
+    }
+    	
     pointermoveHandler(e) {
         const dx = e.movementX;
         const dy = e.movementY;
