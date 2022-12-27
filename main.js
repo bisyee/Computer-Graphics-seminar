@@ -14,7 +14,7 @@ class App extends Application {
 
     async start() {
         this.loader = new GLTFLoader();
-        await this.loader.load('./blender/cameraparenttry12.gltf');
+        await this.loader.load('./blender/map/city.gltf');
 
         this.scene = await this.loader.loadScene(this.loader.defaultScene);
         this.camera = await this.loader.loadNode('Camera_Orientation');
