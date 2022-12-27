@@ -16,6 +16,14 @@ const mat4 = glMatrix.mat4;
 const vec3 = glMatrix.vec3;
 const quat = glMatrix.quat;
 
+var mus = document.getElementById("music");
+
+function playAudio() {
+    mus.currentTime = 0;
+    mus.volume = 0.2;
+    mus.play();
+}
+
 class App extends Application {
     async start() {
         this.loader = new GLTFLoader();
@@ -93,7 +101,7 @@ class App extends Application {
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
 
-        
+        playAudio();
         
     }
 
@@ -146,7 +154,8 @@ class App extends Application {
         }
         return vector;
      }
-
+    
+    
 }
 
 
