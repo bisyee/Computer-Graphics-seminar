@@ -81,7 +81,7 @@ export default class Coins {
                 object.translation[0] > -20 + this.coins[i].translation[0] && 
                 object.translation[2] < this.coins[i].translation[2]+20 && 
                 object.translation[2] > -20 + this.coins[i].translation[2]) {
-                console.log('hit'); 
+                console.log('got coin'); 
                 scene.removeNode(this.coins[i]);
 
                 console.log(this.coins[i]);
@@ -90,6 +90,10 @@ export default class Coins {
                 this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
+                if (this.coins.length == 0) {
+                    location.href='./end.html'
+                }
+                
                 //console.log(this.coinsNum);
                 return true;
                 
