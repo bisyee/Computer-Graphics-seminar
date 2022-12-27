@@ -94,3 +94,36 @@ a.back:hover {
     height: 30px;
     background-color: blue;
 }
+button { 
+    position: absolute;
+    left: 2%;
+    top: 80%;
+    border-radius: 50%; 
+    width: 100px;
+    height: 100px;
+    border: none;
+    color: white;
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    background: green;
+    text-shadow: 0 3px 1px rgba(8, 122, 19, 0.8);
+    box-shadow: 0 8px 0 rgb(30, 147, 62), 
+      0 15px 20px rgba(0,0,0,.35);
+    text-transform: uppercase;
+    transition: .4s all ease-in;
+    outline: none; 
+    cursor: pointer;
+    text-align: center;
+    
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+  button span { position: relative; }
+  /* fix for IE 11 (and IE8+, although the earlier versions are harder to address) stupidly moving the inner button text on click */
+  .pressed { 
+    padding-top: 3px;
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 rgb(7, 200, 62),
+      0 8px 6px rgba(38, 175, 23, 0.45);
+  }
+  

@@ -1,5 +1,6 @@
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Meteors from './Meteors.js';
+import Nitro from './Nitro.js';
 
 export class FirstPersonController {
 
@@ -9,6 +10,8 @@ export class FirstPersonController {
         this.domElement = domElement;
 
         this.keys = {};
+        this.nitro = new Nitro();
+        this.nitroAllow = true;
 
         this.pitch = 1.7;
         this.yaw = -9.8;
@@ -74,13 +77,24 @@ export class FirstPersonController {
         if(this.keys['ArrowUp']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] -360 * dt * 0.003139865044, this.camera.translation[2]);
         }
-        /*if(this.keys['ArrowRight']){
+        if(this.keys['ArrowRight']){
             this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] - 0.00002 , this.camera.rotation[1] - 0.0002, this.camera.rotation[2] ,  this.camera.rotation[3]);
         }
         if(this.keys['ArrowLeft']){
             
             this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] + 0.00002, this.camera.rotation[1]+0.0002, this.camera.rotation[2],  this.camera.rotation[3] );
-        }*/
+        }
+
+        if(this.keys['KeyC']){
+            if(this.nitroAllow){
+                while(this.acceleration <= 1500){
+                    this.acceleration+=100;
+                }
+                this.nitro.subNitro();
+                this.acceleration = 600;
+                this.nitroAllow = false;
+            }
+        }
        
      
 
