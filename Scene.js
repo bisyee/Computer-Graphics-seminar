@@ -11,6 +11,7 @@ export class Scene {
     }
 
     removeNode(node){
+        console.log(this.nodes, 'scene')
         this.nodes.splice(this.nodes.indexOf(node), 1);
     }
 

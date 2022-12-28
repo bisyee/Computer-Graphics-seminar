@@ -17,11 +17,11 @@ export default class Coins {
 
         await loader.load('./blender/coin/coin.gltf');
         coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 0, 400, 0);
+        coin.translation = vec3.set(vec3.create(), 100, 400, 100);
         // coin.rotation = vec3.set(vec3.create(), 1, 0, 0);
         coin.scale = vec3.set(vec3.create(), 20, 3, 20);
         this.coins.push(coin);
-        this.add(scene);
+      
 
 
         await loader.load('./blender/coin/coin.gltf');
@@ -83,7 +83,7 @@ export default class Coins {
                 object.translation[2] > -20 + this.coins[i].translation[2]) {
                 console.log('hit'); 
                 scene.removeNode(this.coins[i]);
-
+                
                 console.log(this.coins[i]);
 
 
