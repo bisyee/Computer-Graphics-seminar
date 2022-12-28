@@ -4,7 +4,8 @@ export default class Coins {
      constructor() {   
         this.coins = [];
         this.coinsNum = 0;
-        
+        localStorage.setItem('status', 'won');
+        localStorage.setItem('coins', this.coinsNum);
     }
 
     async build(loader, scene) {
@@ -81,15 +82,16 @@ export default class Coins {
                 object.translation[0] > -20 + this.coins[i].translation[0] && 
                 object.translation[2] < this.coins[i].translation[2]+20 && 
                 object.translation[2] > -20 + this.coins[i].translation[2]) {
-                console.log('got coin'); 
+                //console.log('got coin'); 
                 scene.removeNode(this.coins[i]);
 
-                console.log(this.coins[i]);
+                //console.log(this.coins[i]);
 
 
                 this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
+                localStorage.setItem('coins', this.coinsNum);
                 if (this.coins.length == 0) {
                     location.href='./end.html'
                 }

@@ -30,7 +30,7 @@ body, html {
   background-size: cover;
 }
 
-.coins {
+#coins {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -44,7 +44,7 @@ body, html {
 
 
 /* Position text in the middle of the page/image */
-.bg-text {
+#bg-text {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
@@ -114,18 +114,12 @@ body, html {
     <h1 style="font-size:20px">Score:  time to be added</h1>   
   </div>
 
-<div class="bg-text">
-  <h1 style="font-size:70px">Collected coins:</h1>
+<div id="bg-text">
+  <h1 style="font-size:70px"></h1>
 </div>
 
-<div class="coins">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
-    <img src="./blender/end/coinspin.gif" alt="coins" style="width:120px;height:120px;">
+<div id="coins">
+    
 </div>
 
 <div class="bg-text4">
@@ -137,5 +131,19 @@ body, html {
    
   </div>-->
 
+  <script>
+    let allC = localStorage.getItem('coins');
+    var numC = document.getElementById('coins');
+    for (let i = 0; i < allC; i++) {
+      numC.innerHTML += "<img src='./blender/end/coinspin.gif' alt='coins' style='width:120px;height:120px;'>";
+    }
+
+    if (localStorage.getItem('status') == 'won') {
+      document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Won!</h1>";
+    } else {
+      document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Better luck next time!</h1>";
+    }
+    
+  </script>
 </body>
 </html>

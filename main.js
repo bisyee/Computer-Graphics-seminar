@@ -18,10 +18,15 @@ const quat = glMatrix.quat;
 
 var mus = document.getElementById("music");
 
+
 function playAudio() {
-    mus.currentTime = 0;
+    //mus.currentTime = 0;
     mus.volume = 0.2;
     mus.play();
+}
+
+function pauseAudio() {
+    mus.pause();
 }
 
 class App extends Application {

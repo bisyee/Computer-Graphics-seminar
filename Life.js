@@ -5,7 +5,8 @@ export default class Life{
     subLife(){
         var elem = document.getElementById("lifeBar");
         if (this.width >= 100) {
-            console.log('endgame');
+            localStorage.setItem('status','lost')
+            location.href='./end.html'
         } else {
             this.width+=10;
             elem.style.width = this.width + "%";
