@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body, html {
-  height: 120%;
+  height: 100%;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -22,7 +22,7 @@ body, html {
   -webkit-filter: blur(4px);
   
   /* Full height */
-  height: 120%; 
+  height: 100%; 
   
   /* Center and scale the image nicely */
   background-position: center;
@@ -59,7 +59,7 @@ body, html {
   padding: 10px;
   text-align: center;
 }
-.bg-text2 {
+#bg-text2 {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
@@ -110,9 +110,9 @@ body, html {
 <body>
 
 <div class="bg-image"></div>
-<div class="bg-text2">
+<div id="bg-text2">
     <h1 style="font-size:20px">Score:  time to be added</h1>   
-  </div>
+</div>
 
 <div id="bg-text">
   <h1 style="font-size:70px"></h1>
@@ -134,6 +134,7 @@ body, html {
   <script>
     let allC = localStorage.getItem('coins');
     var numC = document.getElementById('coins');
+    document.getElementById('bg-text2').innerHTML = "<h1 style='font-size:20px'>Score:  " + allC + "</h1> "
     for (let i = 0; i < allC; i++) {
       numC.innerHTML += "<img src='./blender/end/coinspin.gif' alt='coins' style='width:120px;height:120px;'>";
     }
