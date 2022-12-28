@@ -141,7 +141,9 @@ body, html {
 
     if (localStorage.getItem('status') == 'won') {
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Won!</h1>";
-    } else {
+    } else if(localStorage.getItem('status') == 'fuel'){
+      document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Watch your fuel levels!</h1>";
+    } else{
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Better luck next time!</h1>";
     }
     

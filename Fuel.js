@@ -7,7 +7,7 @@ export default class Fuel {
         function frame() {
         if (width >= 100) {
             clearInterval(id);
-            localStorage.setItem('status','lost')
+            localStorage.setItem('status','fuel')
             location.href='./end.html'
         } else {
             width++;
