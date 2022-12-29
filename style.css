@@ -68,7 +68,7 @@ a.back:hover {
 
 #fuel {
     width: 20%;
-    background-color: grey;
+    background-color: green;
     position: absolute;
     top: 8px;
     left: 16px;
@@ -77,7 +77,7 @@ a.back:hover {
 
 #life {
     width: 20%;
-    background-color: grey;
+    background-color: green;
     position: absolute;
     top: 8px;
     left: 75%;
@@ -87,12 +87,12 @@ a.back:hover {
 #myBar {
     width: 1%;
     height: 30px;
-    background-color: blue;
+    background-color: gray;
 }
 #lifeBar {
     width: 1%;
     height: 30px;
-    background-color: blue;
+    background-color: gray;
 }
 button { 
     position: absolute;

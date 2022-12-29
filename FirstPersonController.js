@@ -88,12 +88,7 @@ export class FirstPersonController {
         if(this.keys['KeyC']){
             var translation1 =  vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1], this.camera.translation[2]);
             if(this.nitroAllow){
-              
-                while(this.acceleration <= 3000){
-                    console.log(this.acceleration)
-                    this.acceleration+=100;
-                    this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 360 * dt * 0.103139865044, this.camera.translation[2]);
-                }
+                setInterval( this.acceleration=3000 , 100);
                
             }
             this.camera.translation = vec3.set(vec3.create(),translation1[0], translation1[1], translation1[2]);
