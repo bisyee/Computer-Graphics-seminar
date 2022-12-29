@@ -50,14 +50,7 @@ class App extends Application {
         this.meteors = new Meteors();
         await this.meteors.build(this.loader,  this.scene);
 
-        this.life = new Life();
-      
-
-        
-       
-
-    
-       
+        this.life = new Life(); 
         // await this.loader.load('./blender/newmer1a.gltf');
         Object.assign(this.camera, { //2
             translation     :vec3.set(vec3.create(), 0, 2, 0),
@@ -123,7 +116,18 @@ class App extends Application {
         var collidedCoins = this.coins.collisionCoins(this.plane, this.scene);
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane,angles);
-        
+        console.log(this.plane.translation)
+        if(this.plane.translation[0] > 1800 || this.plane.translation[2] > 1800 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
+        }
+        if(this.plane.translation[0] < -1600 || this.plane.translation[2] < -1800 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] + 20, 400, this.plane.translation[2] + 20);
+        } 
+        if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2] - 1);
+        } 
+     
+               
         if (collided){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
             this.life.subLife();
@@ -162,9 +166,6 @@ class App extends Application {
     
     
 }
-
-
-
 
 const canvas = document.querySelector('canvas');
 const app = new App(canvas);
