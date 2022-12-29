@@ -116,7 +116,7 @@ class App extends Application {
         var collidedCoins = this.coins.collisionCoins(this.plane, this.scene);
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane,angles);
-        console.log(this.plane.translation)
+       
         if(this.plane.translation[0] > 1800 || this.plane.translation[2] > 1800 ){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
         }
@@ -124,7 +124,7 @@ class App extends Application {
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] + 20, 400, this.plane.translation[2] + 20);
         } 
         if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2] - 1);
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
         } 
      
                
