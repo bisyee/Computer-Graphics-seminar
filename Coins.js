@@ -84,6 +84,7 @@ export default class Coins {
                 object.translation[2] > -20 + this.coins[i].translation[2]) {
                 //console.log('got coin'); 
                 scene.removeNode(this.coins[i]);
+                
                 //console.log(this.coins[i]);
 
 
@@ -91,6 +92,7 @@ export default class Coins {
                 this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
+                document.getElementById("coins").innerHTML = "coins: " + this.coinsNum + "/30";
                 localStorage.setItem('coins', this.coinsNum);
                 if (this.coins.length == 0) {
                     location.href='./end.html'

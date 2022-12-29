@@ -69,7 +69,12 @@ a.back:hover {
 #fuel {
     width: 20%;
     background-color: green;
+    color: white;
     position: absolute;
+    font-family: Avenir, Arial, sans-serif;
+    text-transform: uppercase;
+    font-style: italic; 
+    font-weight: 900;
     top: 8px;
     left: 16px;
     font-size: 18px;
@@ -78,9 +83,15 @@ a.back:hover {
 #life {
     width: 20%;
     background-color: green;
+    font-family: Avenir, Arial, sans-serif;
+    font-style: italic; 
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
     position: absolute;
     top: 8px;
     left: 75%;
+    
     font-size: 18px;
 }
 
@@ -93,6 +104,19 @@ a.back:hover {
     width: 1%;
     height: 30px;
     background-color: gray;
+}
+
+#coins {
+    width: 20%;
+    font-family: Avenir, Arial, sans-serif;
+    font-style: italic; 
+    font-weight: 900;
+    color: green;
+    text-transform: uppercase;
+    position: absolute;
+    top: 10px;
+    left: 43%;
+    font-size: 18px;
 }
 button { 
     position: absolute;
