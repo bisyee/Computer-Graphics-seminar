@@ -8,7 +8,7 @@ import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
 import Speedometer from './Speedometer.js';
-
+import {Light} from './Light.js';
 
 
 
@@ -90,8 +90,11 @@ class App extends Application {
         this.scene.addNode(this.camera);
         this.fuel= new Fuel();
         this.fuel.subFuel();
+        this.speed = 0;
 
         this.speedometer = new Speedometer();
+        this.light = new Light();
+        this.scene.addNode(this.light);
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -107,7 +110,7 @@ class App extends Application {
     }
 
     render() {
-        this.renderer.render(this.scene, this.camera);
+        this.renderer.render(this.scene, this.camera,this.light);
     }
 
     resize(width, height) {
@@ -128,9 +131,10 @@ class App extends Application {
         } 
         if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
-        } 
+        }
+      
 
-        this.speedometer.draw(20);
+        
      
                
         if (collided){
@@ -139,12 +143,10 @@ class App extends Application {
         }
         if(collidedCoins){
             this.checkpoints +=1;
-            console.log(this.checkpoints);
+           
         }
         
-        // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
-        //     console.log('star');
-        // }
+   
 
     }
 
