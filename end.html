@@ -40,6 +40,7 @@ body, html {
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 
@@ -145,6 +146,10 @@ body, html {
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Watch your fuel levels!</h1>";
     } else{
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Better luck next time!</h1>";
+    }
+
+    if (localStorage.getItem('top') < allC) {
+      localStorage.setItem('top', allC);
     }
     
   </script>
