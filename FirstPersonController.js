@@ -1,7 +1,7 @@
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
-
+import Speedometer from './Speedometer.js';
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
@@ -56,6 +56,8 @@ export class FirstPersonController {
 
         // Map user input to the acceleration vector.
         const acc = vec3.create();
+
+        
         if (this.keys['KeyW']) {
             vec3.add(acc, acc, forward);
         }
@@ -88,12 +90,8 @@ export class FirstPersonController {
         if(this.keys['KeyC']){
             var translation1 =  vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1], this.camera.translation[2]);
             if(this.nitroAllow){
-              
-                while(this.acceleration <= 3000){
-                    console.log(this.acceleration)
-                    this.acceleration+=100;
-                    this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 360 * dt * 0.103139865044, this.camera.translation[2]);
-                }
+                console.log(acc, "acc", forward)
+                setInterval( vec3.add(acc, acc, forward) , 100);
                
             }
             this.camera.translation = vec3.set(vec3.create(),translation1[0], translation1[1], translation1[2]);
@@ -117,12 +115,13 @@ export class FirstPersonController {
             const decay = Math.exp(dt * Math.log(1 - this.decay));
             vec3.scale(this.velocity, this.velocity, decay);
         }
-
+        this.speedometer = new Speedometer();
         // Limit speed to prevent accelerating to infinity and beyond.
         const speed = vec3.length(this.velocity);
         if (speed > this.maxSpeed) {
             vec3.scale(this.velocity, this.velocity, this.maxSpeed / speed);
         }
+        this.speedometer.draw(speed);
 
         // Update translation based on velocity.
         this.node.translation = vec3.scaleAndAdd(vec3.create(),

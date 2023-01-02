@@ -8,6 +8,7 @@ import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
+import Speedometer from './Speedometer.js';
 
 
 
@@ -54,14 +55,7 @@ class App extends Application {
         this.meteors = new Meteors();
         await this.meteors.build(this.loader,  this.scene);
 
-        this.life = new Life();
-      
-
-        
-       
-
-    
-       
+        this.life = new Life(); 
         // await this.loader.load('./blender/newmer1a.gltf');
         Object.assign(this.camera, { //2
             translation     :vec3.set(vec3.create(), 0, 2, 0),
@@ -102,6 +96,8 @@ class App extends Application {
         this.scene.addNode(this.camera);
         this.fuel= new Fuel();
         this.fuel.subFuel();
+
+        this.speedometer = new Speedometer();
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -137,7 +133,20 @@ class App extends Application {
             this.plane.translation = vec3.set(vec3.create(), this.planeT[0], 400, this.planeT[2]);
             //this.life.subLife();
         }
-        
+       
+        if(this.plane.translation[0] > 1800 || this.plane.translation[2] > 1800 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
+        }
+        if(this.plane.translation[0] < -1600 || this.plane.translation[2] < -1800 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] + 20, 400, this.plane.translation[2] + 20);
+        } 
+        if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
+            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
+        } 
+
+        this.speedometer.draw(20);
+     
+               
         if (collided){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
             this.life.subLife();
@@ -176,9 +185,6 @@ class App extends Application {
     
     
 }
-
-
-
 
 const canvas = document.querySelector('canvas');
 const app = new App(canvas);
