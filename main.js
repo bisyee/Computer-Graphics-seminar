@@ -7,7 +7,7 @@ import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
-import Speedometer from './Speedometer.js';
+
 
 
 
@@ -91,7 +91,7 @@ class App extends Application {
         this.fuel= new Fuel();
         this.fuel.subFuel();
 
-        this.speedometer = new Speedometer();
+     
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -130,7 +130,7 @@ class App extends Application {
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
         } 
 
-        this.speedometer.draw(20);
+      
      
                
         if (collided){
