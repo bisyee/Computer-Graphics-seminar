@@ -47,7 +47,6 @@ class App extends Application {
         }   
 
         this.barrier = new Barrier();
-        await this.barrier.build(this.loader);
 
         this.coins = new Coins();
         await this.coins.build(this.loader,  this.scene);
@@ -89,9 +88,6 @@ class App extends Application {
             roll             : 0,
             collided         : false
         });
-
-        this.planeT = [this.plane.translation[0], this.plane.translation[1], this.plane.translation[2]];
-        
         this.scene.addNode(this.plane);
         this.scene.addNode(this.camera);
         this.fuel= new Fuel();
@@ -126,25 +122,10 @@ class App extends Application {
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane, angles);
         //console.log(this.plane.translation);
-
-        var collidedBarrier = this.barrier.collision(this.plane, angles);
-
-        if (collidedBarrier){
-            this.plane.translation = vec3.set(vec3.create(), this.planeT[0], 400, this.planeT[2]);
-            //this.life.subLife();
-        }
-       
-        if(this.plane.translation[0] > 1800 || this.plane.translation[2] > 1800 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
-        }
-        if(this.plane.translation[0] < -1600 || this.plane.translation[2] < -1800 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] + 20, 400, this.plane.translation[2] + 20);
-        } 
         if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
         } 
 
-        this.speedometer.draw(20);
      
                
         if (collided){
@@ -159,7 +140,6 @@ class App extends Application {
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');
         // }
-        this.planeT = [this.plane.translation[0], this.plane.translation[1], this.plane.translation[2]];
     }
 
     getEuler(q) {

@@ -1,3 +1,4 @@
+import Barrier from './Barrier.js';
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
@@ -12,6 +13,8 @@ export class FirstPersonController {
         this.keys = {};
         this.nitro = new Nitro();
         this.nitroAllow = true;
+
+        this.bar = new Barrier();
 
         this.pitch = 1.7;
         this.yaw = -9.8;
@@ -106,6 +109,13 @@ export class FirstPersonController {
         // Update velocity based on acceleration.
         vec3.scaleAndAdd(this.velocity, this.velocity, acc, dt * this.acceleration);
 
+        // If you get hit bounce
+        if (this.bar.collision(this.node)) {
+            vec3.negate(this.velocity, this.velocity);
+            vec3.scale(this.velocity, this.velocity, 1);
+        }
+        
+
         // If there is no user input, apply decay.
         if (!this.keys['KeyW'] &&
             !this.keys['KeyS'] &&
@@ -116,6 +126,8 @@ export class FirstPersonController {
             vec3.scale(this.velocity, this.velocity, decay);
         }
         this.speedometer = new Speedometer();
+
+
         // Limit speed to prevent accelerating to infinity and beyond.
         const speed = vec3.length(this.velocity);
         if (speed > this.maxSpeed) {

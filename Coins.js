@@ -35,12 +35,12 @@ export default class Coins {
             [-800, 1200],
             [-1200, 900],
             [-1300, 450],
-            [-1000, 100]/**/
+            [-1000, 100]
         ];
 
         var coin;
         for (let i = 0; i < locat.length; i++) {
-            console.log("hola");
+            //console.log("hola");
             await loader.load('./blender/coin/coin.gltf');
             coin = await loader.loadNode(loader.defaultScene);
             coin.translation = vec3.set(vec3.create(), locat[i][0], 400, locat[i][1]);
