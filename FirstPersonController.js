@@ -1,7 +1,7 @@
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
-import Speedometer from './Speedometer.js';
+import AirSpeed from './AirSpeed.js';
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
@@ -117,13 +117,13 @@ export class FirstPersonController {
             const decay = Math.exp(dt * Math.log(1 - this.decay));
             vec3.scale(this.velocity, this.velocity, decay);
         }
-        this.speedometer = new Speedometer();
-        // Limit speed to prevent accelerating to infinity and beyond.
+        this.airspeed = new AirSpeed();
+        // Limit speed to prevent acceleairspeedrating to infinity and beyond.
         const speed = vec3.length(this.velocity);
         if (speed > this.maxSpeed) {
             vec3.scale(this.velocity, this.velocity, this.maxSpeed / speed);
         }
-        this.speedometer.draw(speed);
+        this.airspeed.draw(speed);
 
         // Update translation based on velocity.
         this.node.translation = vec3.scaleAndAdd(vec3.create(),
