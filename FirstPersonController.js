@@ -79,14 +79,16 @@ export class FirstPersonController {
         if(this.keys['ArrowUp']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] -360 * dt * 0.003139865044, this.camera.translation[2]);
         }
-
+        console.log(this.camera);
         if(this.keys['ArrowRight']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0]+0.005, this.camera.translation[1]  , this.camera.translation[2]);
             this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] + 0.00002, this.camera.rotation[1]+0.0002, this.camera.rotation[2],  this.camera.rotation[3] );
+
         }
         if(this.keys['ArrowLeft']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0]-0.005, this.camera.translation[1] , this.camera.translation[2]);
             this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] - 0.00002 , this.camera.rotation[1] - 0.0002, this.camera.rotation[2] ,  this.camera.rotation[3]);
+ 
         }
 
         if(this.keys['KeyC']){
@@ -118,7 +120,7 @@ export class FirstPersonController {
             vec3.scale(this.velocity, this.velocity, decay);
         }
         this.airspeed = new AirSpeed();
-        // Limit speed to prevent acceleairspeedrating to infinity and beyond.
+        // Limit speed to prevent accelerating to infinity and beyond.
         const speed = vec3.length(this.velocity);
         if (speed > this.maxSpeed) {
             vec3.scale(this.velocity, this.velocity, this.maxSpeed / speed);
