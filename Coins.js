@@ -79,7 +79,7 @@ export default class Coins {
                 this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
-                document.getElementById("coins").innerHTML = "coins: " + this.coinsNum + "/30";
+                document.getElementById("coins").innerHTML = "coins: " + this.coinsNum + "/25";
                 localStorage.setItem('coins', this.coinsNum);
                 if (this.coins.length == 0) {
                     location.href='./end.html'

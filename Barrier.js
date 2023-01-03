@@ -1,4 +1,5 @@
-const vec3 = glMatrix.vec3;
+
+// const vec3 = glMatrix.vec3;
 
 export default class Barrier {
      constructor() {   
@@ -7,15 +8,14 @@ export default class Barrier {
     
     collision(object) {
         let collided = false;
-        if ((object.translation[0] > this.barrier[0]+1700 ||
-            object.translation[0] < this.barrier[0]-1700 ||
-            object.translation[2] > this.barrier[2]+1700 || 
-            object.translation[2] < this.barrier[2]-1700
+        if ((object.translation[0] > this.barrier.translation[0]+1500 ||
+            object.translation[0] < this.barrier.translation[0]-1500 ||
+            object.translation[2] > this.barrier.translation[2]+1500 || 
+            object.translation[2] < this.barrier.translation[2]-1500
             )) {
-            //console.log('hit');
+            console.log('hit');
             collided = true;
         }          
         return collided;
     }
-
 }

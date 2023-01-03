@@ -3,12 +3,14 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { Renderer } from './Renderer.js';
 import { FirstPersonController } from './FirstPersonController.js';
-import Barrier from './Barrier.js';
+
+// import Barrier from './Barrier.js';
+
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
-import Speedometer from './Speedometer.js';
+
 
 
 
@@ -46,7 +48,10 @@ class App extends Application {
             throw new Error('Camera node does not contain a camera reference');
         }   
 
-        this.barrier = new Barrier();
+
+        // this.barrier = new Barrier();
+        // await this.barrier.build(this.loader);
+
 
         this.coins = new Coins();
         await this.coins.build(this.loader,  this.scene);
@@ -93,7 +98,7 @@ class App extends Application {
         this.fuel= new Fuel();
         this.fuel.subFuel();
 
-        this.speedometer = new Speedometer();
+     
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
