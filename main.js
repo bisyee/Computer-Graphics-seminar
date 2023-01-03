@@ -3,12 +3,14 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { Renderer } from './Renderer.js';
 import { FirstPersonController } from './FirstPersonController.js';
-import Barrier from './Barrier.js';
+
+// import Barrier from './Barrier.js';
+
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
-import Speedometer from './Speedometer.js';
+
 
 
 
@@ -46,8 +48,10 @@ class App extends Application {
             throw new Error('Camera node does not contain a camera reference');
         }   
 
-        this.barrier = new Barrier();
-        await this.barrier.build(this.loader);
+
+        // this.barrier = new Barrier();
+        // await this.barrier.build(this.loader);
+
 
         this.coins = new Coins();
         await this.coins.build(this.loader,  this.scene);
@@ -97,7 +101,7 @@ class App extends Application {
         this.fuel= new Fuel();
         this.fuel.subFuel();
 
-        this.speedometer = new Speedometer();
+     
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -127,7 +131,9 @@ class App extends Application {
         var collided = this.meteors.collision(this.plane, angles);
         //console.log(this.plane.translation);
 
-        var collidedBarrier = this.barrier.collision(this.plane, angles);
+
+        // var collidedBarrier = this.barrier.collision(this.plane, angles);
+
 
         if (collidedBarrier){
             this.plane.translation = vec3.set(vec3.create(), this.planeT[0], 400, this.planeT[2]);
@@ -144,7 +150,7 @@ class App extends Application {
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
         } 
 
-        this.speedometer.draw(20);
+      
      
                
         if (collided){
