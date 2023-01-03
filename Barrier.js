@@ -1,3 +1,4 @@
+
 // const vec3 = glMatrix.vec3;
 
 // export default class Barrier {
@@ -28,3 +29,4 @@
 //     }
 
 // }
+
