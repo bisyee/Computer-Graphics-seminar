@@ -20,7 +20,6 @@ export class FirstPersonController {
 
         this.pitch = 1.7;
         this.yaw = -9.8;
-
         this.velocity = [0, 0, 0];
         this.acceleration = 400;
         this.maxSpeed = 3000;
@@ -41,14 +40,14 @@ export class FirstPersonController {
         doc.addEventListener('keydown', this.keydownHandler);
         doc.addEventListener('keyup', this.keyupHandler);
 
-        /*element.addEventListener('click', e => element.requestPointerLock());
+        element.addEventListener('click', e => element.requestPointerLock());
         doc.addEventListener('pointerlockchange', e => {
             if (doc.pointerLockElement === element) {
                 doc.addEventListener('pointermove', this.pointermoveHandler);
             } else {
                 doc.removeEventListener('pointermove', this.pointermoveHandler);
             }
-        });*/
+        });
     }
 
     update(dt) {
@@ -71,7 +70,6 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
-            console.log(this.node.rotation)
 
             this.yaw -=0.01;
         }
