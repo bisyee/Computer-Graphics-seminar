@@ -62,7 +62,7 @@ class App extends Application {
         this.life = new Life(); 
         // await this.loader.load('./blender/newmer1a.gltf');
         Object.assign(this.camera, { //2
-            translation     :vec3.set(vec3.create(), 0, 2, 0),
+            translation     :vec3.set(vec3.create(), 0, 3, 0),
             fov             : 1.5,
             maxFov          : 1.8,
             minFov          : 1,
@@ -72,7 +72,7 @@ class App extends Application {
             roll            : 0,
             distanceFromPlane : 50,
             zoom            : -20,
-            offset          : 0,
+            offset          : 0.5,
             angle           : 0
         });
 
