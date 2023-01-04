@@ -3,6 +3,9 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { Renderer } from './Renderer.js';
 import { FirstPersonController } from './FirstPersonController.js';
+
+// import Barrier from './Barrier.js';
+
 import Coins from './Coins.js';
 import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
@@ -45,6 +48,11 @@ class App extends Application {
             throw new Error('Camera node does not contain a camera reference');
         }   
 
+
+        // this.barrier = new Barrier();
+        // await this.barrier.build(this.loader);
+
+
         this.coins = new Coins();
         await this.coins.build(this.loader,  this.scene);
 
@@ -85,7 +93,6 @@ class App extends Application {
             roll             : 0,
             collided         : false
         });
-        
         this.scene.addNode(this.plane);
         this.scene.addNode(this.camera);
         this.fuel= new Fuel();
@@ -118,19 +125,12 @@ class App extends Application {
         this.controller.update(dt);
         var collidedCoins = this.coins.collisionCoins(this.plane, this.scene);
         let angles = this.getEuler(this.plane.rotation);
-        var collided = this.meteors.collision(this.plane,angles);
-       
-        if(this.plane.translation[0] > 1800 || this.plane.translation[2] > 1800 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
-        }
-        if(this.plane.translation[0] < -1600 || this.plane.translation[2] < -1800 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] + 20, 400, this.plane.translation[2] + 20);
-        } 
+        var collided = this.meteors.collision(this.plane, angles);
+        //console.log(this.plane.translation);
         if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
         } 
 
-      
      
                
         if (collided){
@@ -145,7 +145,6 @@ class App extends Application {
         // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
         //     console.log('star');
         // }
-
     }
 
     getEuler(q) {

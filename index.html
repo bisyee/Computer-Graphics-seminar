@@ -10,6 +10,21 @@
 
     <script type="text/javascript" src="./lib/gl-matrix-min.js"></script>
     <script type="module" src="main.js"></script>
+    <style>.bg-text4 {
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+        color: white;
+        font-weight: bold;
+        border: 3px solid #f1f1f1;
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 10%;
+        padding: 10px;
+        text-align: center;
+      }</style>
 </head>
 <body>
 
@@ -24,14 +39,17 @@
         <div id="myBar">Fuel</div>
     </div>
     <div id="coins">
-        Coins: 0 / 30
+        Coins: 0 / 25
     </div>
 
     <div id="life">
         <div id="lifeBar">Life</div>
     </div>
+    <div class="bg-text4">
+        <a style="font-size:20px" onclick="location.href='./start.html'" type="button">Back</a>
+      </div>
     <div><button id="nitrobutton"><span>NITRO</span></button> </div>
-    <canvas id='speedometer'></canvas>
+    <canvas id='airspeed'></canvas>
 
     <div id="stack0">
         <div id='stack'>
