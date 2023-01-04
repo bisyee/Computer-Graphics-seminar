@@ -4,6 +4,7 @@ import Barrier from './Barrier.js';
 import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
 import AirSpeed from './AirSpeed.js';
+import Life from './Life.js';
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
@@ -25,7 +26,7 @@ export class FirstPersonController {
         this.maxSpeed = 3000;
         this.decay = 0.9;
         this.pointerSensitivity = 0.002;
-
+        this.life = new Life();
         this.initHandlers();
     }
 
@@ -70,6 +71,8 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
+            console.log(this.node.rotation)
+
             this.yaw -=0.01;
         }
         if (this.keys['KeyA']) {
@@ -107,12 +110,18 @@ export class FirstPersonController {
             this.acceleration = 600;
             this.nitroAllow = false;
         }
+    
        
      
 
 
         // Update velocity based on acceleration.
         vec3.scaleAndAdd(this.velocity, this.velocity, acc, dt * this.acceleration);
+        if(this.node.translation[0] >330 && this.node.translation[0]<475 &&  this.node.translation[2] > 330  &&  this.node.translation[2] <455 ){
+            vec3.negate(this.velocity, this.velocity);
+            vec3.scale(this.velocity, this.velocity, 1);
+            this.life.subLife();
+        } 
 
 
         // If you get hit bounce
