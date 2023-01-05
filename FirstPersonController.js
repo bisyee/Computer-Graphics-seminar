@@ -108,8 +108,12 @@ export class FirstPersonController {
             this.acceleration = 600;
             this.nitroAllow = false;
         }
+        if(this.node.translation[0] >330 && this.node.translation[0]<475 &&  this.node.translation[2] > 330  &&  this.node.translation[2] <455 ){
+            vec3.negate(this.velocity, this.velocity);
+            vec3.scale(this.velocity, this.velocity, 1);
+        }
        
-     
+        
 
 
         // Update velocity based on acceleration.
@@ -121,7 +125,6 @@ export class FirstPersonController {
             vec3.negate(this.velocity, this.velocity);
             vec3.scale(this.velocity, this.velocity, 1);
         }
-        
         
 
         // If there is no user input, apply decay.

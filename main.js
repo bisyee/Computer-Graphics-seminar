@@ -132,6 +132,8 @@ class App extends Application {
     }
     update(time, dt){
         this.controller.update(dt);
+        this.coins.update(dt);
+        
         var collidedCoins = this.coins.collisionCoins(this.plane, this.scene);
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane, angles);

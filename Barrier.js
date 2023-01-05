@@ -19,5 +19,8 @@ export default class Barrier {
         }          
         return collided;
     }
+
 }
+
+
 

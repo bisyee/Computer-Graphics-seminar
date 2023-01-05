@@ -136,7 +136,8 @@ body, html {
     let allC = localStorage.getItem('coins');
     var numC = document.getElementById('coins');
     document.getElementById('bg-text2').innerHTML = "<h1 style='font-size:20px'>Score:  " + allC + "</h1> "
-    let a = allC * 4 / 10;
+
+    let a = allC * 4 / 20;
     a = parseInt(a, 10);
     for (let i = 0; i < a; i++) {
       numC.innerHTML += "<img src='./blender/end/coinspin.gif' alt='coins' style='width:120px;height:120px;'>";
