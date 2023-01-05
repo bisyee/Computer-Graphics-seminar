@@ -137,6 +137,10 @@ a.back:hover {
     height: 30px;
     background-color: gray;
 }
+#backbutton {
+    top: 80%;
+    left: 47%;
+}
 
 #coins {
     width: 20%;
