@@ -225,7 +225,7 @@ export class Renderer {
     renderNode(node, mvpMatrix,t) {
         const gl = this.gl;
         mvpMatrix = mat4.clone(mvpMatrix);
-        console.log(node)
+
         mat4.mul(mvpMatrix, mvpMatrix, node.localMatrix);
 
         if (node.mesh) {
@@ -250,7 +250,7 @@ export class Renderer {
         gl.bindVertexArray(vao);
         
         const material = primitive.material;
-        console.log(program.uniforms)
+        
         gl.uniform4fv(program.uniforms.uBaseColorFactor, material.baseColorFactor);
        
         gl.activeTexture(gl.TEXTURE0);

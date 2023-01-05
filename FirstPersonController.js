@@ -1,7 +1,7 @@
 
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Barrier from './Barrier.js';
-import Nitro from './Nitro.js';
+import Turbo from './Turbo.js';
 import Life from './Life.js';
 import AirSpeed from './AirSpeed.js';
 
@@ -13,8 +13,8 @@ export class FirstPersonController {
         this.domElement = domElement;
         
         this.keys = {};
-        this.nitro = new Nitro();
-        this.nitroAllow = true;
+        this.turbo = new Turbo();
+        this.turboAllow = true;
 
         this.bar = new Barrier();
         this.life = new Life();
@@ -52,7 +52,6 @@ export class FirstPersonController {
     }
 
     update(dt) {
-        
         // Calculate forward and right vectors.
         const cos = Math.cos(this.yaw);
         const sin = Math.sin(this.yaw);
@@ -96,18 +95,15 @@ export class FirstPersonController {
  
         }
 
-        if(this.keys['KeyC']){
-            var translation1 =  vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1], this.camera.translation[2]);
-            if(this.nitroAllow){
-                var id = setInterval(this.acceleration = 3000, 3000);
-                clearInterval(id);
-                
-                //Interval ne dela 
+        if(this.keys['KeyT']){
+            if(this.turboAllow){
+                    this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 0.5, this.camera.translation[2]);
+                    this.acceleration = 1500;
+                    this.turbo.subNitro();
             }
-            this.camera.translation = vec3.set(vec3.create(),translation1[0], translation1[1], translation1[2]);
-            this.nitro.subNitro();
+            this.camera.translation = vec3.set(vec3.create(),0, 3, 0);
             this.acceleration = 600;
-            this.nitroAllow = false;
+            this.turboAllow = false;
         }
         if(this.node.translation[0] >330 && this.node.translation[0]<475 &&  this.node.translation[2] > 330  &&  this.node.translation[2] <455 ){
             vec3.negate(this.velocity, this.velocity);

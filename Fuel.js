@@ -1,8 +1,5 @@
-import { Light } from "./Light.js";
+
 export default class Fuel {
-    constructor(){
-        this.light = new Light();
-    }
     subFuel(){
         var elem = document.getElementById("myBar");
         var width = 1;
@@ -12,8 +9,6 @@ export default class Fuel {
             clearInterval(id);
             localStorage.setItem('status','fuel');
             location.href='./end.html';
-            this.light.turnOff();
-
         } else {
             width++;
             elem.style.width = width + "%";

@@ -111,6 +111,27 @@ a.back:hover {
     height: 30px;
     background-color: gray;
 }
+
+#turbo {
+    width: 20%;
+    background-color: green;
+    font-family: Avenir, Arial, sans-serif;
+    font-style: italic; 
+    font-weight: 900;
+    color: white;
+    text-transform: uppercase;
+    position: absolute;
+    top: 90%;
+    left: 1%;
+    
+    font-size: 18px;
+}
+
+#turboBar {
+    width: 1%;
+    height: 30px;
+    background-color: gray;
+}
 #lifeBar {
     width: 1%;
     height: 30px;

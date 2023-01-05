@@ -57,7 +57,7 @@ class App extends Application {
         this.meteors = new Meteors();
         await this.meteors.build(this.loader,  this.scene);
         Object.assign(this.camera, { //2
-            translation     :vec3.set(vec3.create(), 0, 2, 0),
+            translation     :vec3.set(vec3.create(), 0, 3, 0),
             fov             : 1.5,
             maxFov          : 1.8,
             minFov          : 1,

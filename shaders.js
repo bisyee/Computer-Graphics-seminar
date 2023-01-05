@@ -54,14 +54,12 @@ void main() {
     vec3 E = normalize(vEye);
     vec3 R = normalize(reflect(L, N));
 
-    float lambert = max(0.0, dot(L, N));
     float phong = pow(max(0.0, dot(E, R)), uShininess);
 
     vec3 ambient = uAmbientColor;
-    vec3 diffuse = uDiffuseColor * lambert;
     vec3 specular = uSpecularColor * phong;
 
-    vec3 light = (ambient + diffuse + specular) * vAttenuation;
+    vec3 light = (ambient + specular) * vAttenuation;
     vec4 baseColor = texture(uBaseColorTexture, vTexCoord);
     oColor = uBaseColorFactor * vec4(light, 1) * baseColor;
    
