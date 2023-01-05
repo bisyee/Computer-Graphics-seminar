@@ -40,6 +40,7 @@ body, html {
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 
@@ -111,7 +112,7 @@ body, html {
 
 <div class="bg-image"></div>
 <div id="bg-text2">
-    <h1 style="font-size:20px">Score:  time to be added</h1>   
+    <h1 style="font-size:20px">Score:  </h1>   
 </div>
 
 <div id="bg-text">
@@ -135,7 +136,9 @@ body, html {
     let allC = localStorage.getItem('coins');
     var numC = document.getElementById('coins');
     document.getElementById('bg-text2').innerHTML = "<h1 style='font-size:20px'>Score:  " + allC + "</h1> "
-    for (let i = 0; i < allC; i++) {
+    let a = allC * 4 / 10;
+    a = parseInt(a, 10);
+    for (let i = 0; i < a; i++) {
       numC.innerHTML += "<img src='./blender/end/coinspin.gif' alt='coins' style='width:120px;height:120px;'>";
     }
 
@@ -145,6 +148,11 @@ body, html {
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Watch your fuel levels!</h1>";
     } else{
       document.getElementById('bg-text').innerHTML = "<h1 style='font-size:70px'>You Lost <br/> Better luck next time!</h1>";
+    }
+    let t = localStorage.getItem('top');
+    if (t < allC) {
+      console.log(t);
+      localStorage.setItem('top', allC);
     }
     
   </script>

@@ -10,8 +10,6 @@ export default class Speedometer {
    }
 
     draw(speed) {
-        var img=new Image();
-        img.src="./plane.jpg";
         let oPointX, oPointY, iPointX, iPointY, wPointX, wPointY, angle, sineAngle, cosAngle, pointX, pointY;
         context.clearRect(0,0,canvas.width, canvas.height);
         var centerX = 180;

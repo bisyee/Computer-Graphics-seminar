@@ -46,7 +46,7 @@ body, html {
   padding: 10px;
   text-align: center;
 }
-.bg-text2 {
+#bg-text2 {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
@@ -97,7 +97,7 @@ body, html {
 <body>
 
 <div class="bg-image"></div>
-<div class="bg-text2">
+<div id="bg-text2">
     <h1 style="font-size:20px">Top Score: ToDo</h1>   
 </div>
 
@@ -111,6 +111,16 @@ body, html {
     <h1 style="font-size:20px">Controls: W, A, S, D </h1>
    
   </div>
-
+  <script>
+    let topS = localStorage.getItem('top');
+    var numC = document.getElementById('bg-text2');
+    console.log(topS);
+    if (topS == null) {
+      localStorage.setItem('top', 0);
+    }
+  document.getElementById('bg-text2').innerHTML = "<h1 style='font-size:20px'>Top Score:  " + topS + "</h1> "
+    
+    
+  </script>
 </body>
 </html>

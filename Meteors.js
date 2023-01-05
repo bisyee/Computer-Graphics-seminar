@@ -6,37 +6,34 @@ export default class Meteors {
     }
 
     async build(loader, scene) {
-        await loader.load('./blender/meteor/Planet.gltf');
-        let meteor = await loader.loadNode(loader.defaultScene);
-        meteor.translation = vec3.set(vec3.create(), 300, 400, 300);
-        meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
-        this.meteors.push(meteor);
 
-        await loader.load('./blender/meteor/Planet.gltf');
-        meteor = await loader.loadNode(loader.defaultScene);
-        meteor.translation = vec3.set(vec3.create(), -300, 400, 300);
-        meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
-        this.meteors.push(meteor);
-        
-        await loader.load('./blender/meteor/Planet.gltf');
-        meteor = await loader.loadNode(loader.defaultScene);
-        meteor.translation = vec3.set(vec3.create(), 100, 400, -500);
-        meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
-        this.meteors.push(meteor);
+        let locat = [
+            [700, 1300],
+            [700, 700],
+            [650, 100],
+            [1100, -100],
+            [750, -750],
+            [0, 0],
+            [0, -700],
+            [-350, -200],
+            [-350, -1300],
+            [-1000, -750],
+            [-1400, -200],
+            [-200, 300],
+            [-200, 1200],
+            [-700, 200],
+            [-1100, 800]
+        ];
 
-        await loader.load('./blender/meteor/Planet.gltf');
-        meteor = await loader.loadNode(loader.defaultScene);
-        meteor.translation = vec3.set(vec3.create(), 300, 400, -300);
-        meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
-        this.meteors.push(meteor);
+        var meteor;
 
-        await loader.load('./blender/meteor/Planet.gltf');
-        meteor = await loader.loadNode(loader.defaultScene);
-        meteor.translation = vec3.set(vec3.create(), -300, 400, -300);
-        meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
-        this.meteors.push(meteor);
-
-
+        for (let i = 0; i < locat.length; i++) {
+            await loader.load('./blender/meteor/Planet.gltf');
+            meteor = await loader.loadNode(loader.defaultScene);
+            meteor.translation = vec3.set(vec3.create(), locat[i][0], 400, locat[i][1]);
+            meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
+            this.meteors.push(meteor);
+        }
 
         this.add(scene);
     }

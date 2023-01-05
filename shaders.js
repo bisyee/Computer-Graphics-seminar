@@ -1,6 +1,6 @@
 const vertex = `#version 300 es
-layout (location = 0) in vec3 aPosition;
-layout (location = 1) in vec2 aTexCoord;
+layout (location = 0) in vec4 aPosition;
+layout (location = 3) in vec2 aTexCoord;
 layout (location = 2) in vec3 aNormal;
 
 uniform mat4 uMvpMatrix;
@@ -14,7 +14,7 @@ out vec3 vNormal;
 out vec2 vTexCoord;
 out float vAttenuation;
 void main() {
-    vec3 vertexPosition = (uMvpMatrix * vec4(aPosition, 1)).xyz;
+    vec3 vertexPosition = (uMvpMatrix *aPosition).xyz;
     vec3 lightPosition = (uMvpMatrix * vec4(uLightPosition, 1)).xyz;
     vEye = -vertexPosition;
     vLight = lightPosition - vertexPosition;
@@ -24,14 +24,15 @@ void main() {
     float d = distance(vertexPosition, lightPosition);
     vec3 attenuation = uLightAttenuation * vec3(1, d, d * d);
     vAttenuation = 1.0 / dot(attenuation, vec3(1, 1, 1));
-    gl_Position = uMvpMatrix * vec4(aPosition, 1);
+    gl_Position = uMvpMatrix * aPosition;
 }
 `;
 
 const fragment = `#version 300 es
 precision mediump float;
 
-uniform mediump sampler2D uTexture;
+uniform sampler2D uBaseColorTexture;
+uniform vec4 uBaseColorFactor;
 
 uniform vec3 uAmbientColor;
 uniform vec3 uDiffuseColor;
@@ -61,7 +62,10 @@ void main() {
     vec3 specular = uSpecularColor * phong;
 
     vec3 light = (ambient + diffuse + specular) * vAttenuation;
-    oColor = texture(uTexture, vTexCoord) * vec4(light, 1);
+    vec4 baseColor = texture(uBaseColorTexture, vTexCoord);
+    oColor = uBaseColorFactor * vec4(light, 1) * baseColor;
+   
+   
 }
 `;
 

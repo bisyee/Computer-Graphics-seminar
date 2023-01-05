@@ -9,58 +9,45 @@ export default class Coins {
     }
 
     async build(loader, scene) {
-        await loader.load('./blender/coin/coin.gltf');
-        let coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 400, 400, -300);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
-        // console.log(this.gl.canvas);
 
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 100, 400, 100);
-        // coin.rotation = vec3.set(vec3.create(), 1, 0, 0);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
-      
+        let locat = [
+            [100 , 150],
+            [360, 750],
+            [750, 1000],
+            [1300, 800],
+            [1400, 370],
+            [1350, -200],
+            [1100, -650],
+            [600, -750],
+            [375, -375],
+            [600, 400],
+            [1000, 360],
+            [800, -200],
+            [0, -370],
+            [-370, -370],
+            [-900, -370],
+            [-1200, -800],
+            [-900, -1200],
+            [-400, -800],
+            [-370, 0],
+            [-370, 370],
+            [-370, 850],
+            [-800, 1200],
+            [-1200, 900],
+            [-1300, 450],
+            [-1000, 100]
+        ];
 
+        var coin;
+        for (let i = 0; i < locat.length; i++) {
+            //console.log("hola");
+            await loader.load('./blender/coin/coin.gltf');
+            coin = await loader.loadNode(loader.defaultScene);
+            coin.translation = vec3.set(vec3.create(), locat[i][0], 400, locat[i][1]);
+            coin.scale = vec3.set(vec3.create(), 20, 3, 20);
+            this.coins.push(coin);
+        }
 
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), -400, 400, -400);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
-  
-
-
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), -400, 400, 400);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
- 
-
-
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), -100, 400, 800);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
- 
-
-
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 300, 400, 0);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
-
-
-        await loader.load('./blender/coin/coin.gltf');
-        coin = await loader.loadNode(loader.defaultScene);
-        coin.translation = vec3.set(vec3.create(), 300, 400, 800);
-        coin.scale = vec3.set(vec3.create(), 20, 3, 20);
-        this.coins.push(coin);
         this.add(scene);
     
     }
@@ -92,7 +79,7 @@ export default class Coins {
                 this.coins.splice(i, 1); 
                 collided = true;
                 this.coinsNum+=1;
-                document.getElementById("coins").innerHTML = "coins: " + this.coinsNum + "/30";
+                document.getElementById("coins").innerHTML = "coins: " + this.coinsNum + "/25";
                 localStorage.setItem('coins', this.coinsNum);
                 if (this.coins.length == 0) {
                     location.href='./end.html'

@@ -1,7 +1,9 @@
+
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
+import Barrier from './Barrier.js';
 import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
-import Speedometer from './Speedometer.js';
+import AirSpeed from './AirSpeed.js';
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
@@ -13,11 +15,13 @@ export class FirstPersonController {
         this.nitro = new Nitro();
         this.nitroAllow = true;
 
+        this.bar = new Barrier();
+
         this.pitch = 1.7;
         this.yaw = -9.8;
 
         this.velocity = [0, 0, 0];
-        this.acceleration = 600;
+        this.acceleration = 400;
         this.maxSpeed = 3000;
         this.decay = 0.9;
         this.pointerSensitivity = 0.002;
@@ -79,12 +83,16 @@ export class FirstPersonController {
         if(this.keys['ArrowUp']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] -360 * dt * 0.003139865044, this.camera.translation[2]);
         }
+        //console.log(this.camera);
         if(this.keys['ArrowRight']){
-            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] - 0.00002 , this.camera.rotation[1] - 0.0002, this.camera.rotation[2] ,  this.camera.rotation[3]);
+            this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0]+0.005, this.camera.translation[1]  , this.camera.translation[2]);
+            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] + 0.00002, this.camera.rotation[1]+0.0002, this.camera.rotation[2],  this.camera.rotation[3] );
+
         }
         if(this.keys['ArrowLeft']){
-            
-            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] + 0.00002, this.camera.rotation[1]+0.0002, this.camera.rotation[2],  this.camera.rotation[3] );
+            this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0]-0.005, this.camera.translation[1] , this.camera.translation[2]);
+            this.camera.rotation = vec4.set(vec4.create(),this.camera.rotation[0] - 0.00002 , this.camera.rotation[1] - 0.0002, this.camera.rotation[2] ,  this.camera.rotation[3]);
+ 
         }
 
         if(this.keys['KeyC']){
@@ -107,6 +115,15 @@ export class FirstPersonController {
         // Update velocity based on acceleration.
         vec3.scaleAndAdd(this.velocity, this.velocity, acc, dt * this.acceleration);
 
+
+        // If you get hit bounce
+        if (this.bar.collision(this.node)) {
+            vec3.negate(this.velocity, this.velocity);
+            vec3.scale(this.velocity, this.velocity, 1);
+        }
+        
+        
+
         // If there is no user input, apply decay.
         if (!this.keys['KeyW'] &&
             !this.keys['KeyS'] &&
@@ -116,17 +133,18 @@ export class FirstPersonController {
             const decay = Math.exp(dt * Math.log(1 - this.decay));
             vec3.scale(this.velocity, this.velocity, decay);
         }
-        this.speedometer = new Speedometer();
+        this.airspeed = new AirSpeed();
+
         // Limit speed to prevent accelerating to infinity and beyond.
         const speed = vec3.length(this.velocity);
         if (speed > this.maxSpeed) {
             vec3.scale(this.velocity, this.velocity, this.maxSpeed / speed);
         }
-        this.speedometer.draw(speed);
+        this.airspeed.draw(speed);
 
         // Update translation based on velocity.
         this.node.translation = vec3.scaleAndAdd(vec3.create(),
-            this.node.translation, this.velocity, dt);
+        this.node.translation, this.velocity, dt);
 
         // Update rotation based on the Euler angles.
         const rotation = quat.create();
@@ -134,7 +152,7 @@ export class FirstPersonController {
         quat.rotateX(rotation, rotation, this.pitch);
         this.node.rotation = rotation;
 
-      
+        
         
     }
     	

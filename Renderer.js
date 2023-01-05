@@ -217,6 +217,7 @@ export class Renderer {
         gl.uniform3fv(program.uniforms.uLightAttenuation, light.attenuatuion);
 
         for (const node of scene.nodes) {
+    
             this.renderNode(node, mvpMatrix);
         }
     }
@@ -224,11 +225,12 @@ export class Renderer {
     renderNode(node, mvpMatrix,t) {
         const gl = this.gl;
         mvpMatrix = mat4.clone(mvpMatrix);
-  
-        mat4.mul(mvpMatrix, mvpMatrix, node._matrix);
+        console.log(node)
+        mat4.mul(mvpMatrix, mvpMatrix, node.localMatrix);
 
         if (node.mesh) {
             const program = this.programs.phong;
+
             gl.uniformMatrix4fv(program.uniforms.uMvpMatrix, false, mvpMatrix);
             for (const primitive of node.mesh.primitives) {
                 this.renderPrimitive(primitive);
@@ -248,7 +250,7 @@ export class Renderer {
         gl.bindVertexArray(vao);
         
         const material = primitive.material;
-    
+        console.log(program.uniforms)
         gl.uniform4fv(program.uniforms.uBaseColorFactor, material.baseColorFactor);
        
         gl.activeTexture(gl.TEXTURE0);
