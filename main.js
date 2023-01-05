@@ -11,6 +11,9 @@ import Meteors from './Meteors.js';
 import Fuel from './Fuel.js';
 import Life from './Life.js';
 
+import {Light} from './Light.js';
+import AirSpeed from './AirSpeed.js';
+
 
 
 
@@ -97,8 +100,14 @@ class App extends Application {
         this.scene.addNode(this.camera);
         this.fuel= new Fuel();
         this.fuel.subFuel();
+        this.speed = 0;
 
-     
+
+       
+        this.light = new Light();
+        this.scene.addNode(this.light);
+
+
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -114,7 +123,7 @@ class App extends Application {
     }
 
     render() {
-        this.renderer.render(this.scene, this.camera);
+        this.renderer.render(this.scene, this.camera,this.light);
     }
 
     resize(width, height) {
@@ -129,9 +138,9 @@ class App extends Application {
         //console.log(this.plane.translation);
         if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
-        } 
+        }
 
-     
+
                
         if (collided){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
@@ -139,12 +148,9 @@ class App extends Application {
         }
         if(collidedCoins){
             this.checkpoints +=1;
-            console.log(this.checkpoints);
+           
         }
         
-        // if(this.plane.translation[0] == vec3.set(vec3.create(), 720, 200, 900)[0]){
-        //     console.log('star');
-        // }
     }
 
     getEuler(q) {
