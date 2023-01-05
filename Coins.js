@@ -1,9 +1,12 @@
 const vec3 = glMatrix.vec3;
+const quat = glMatrix.quat;
+
 
 export default class Coins {
      constructor() {   
         this.coins = [];
         this.coinsNum = 0;
+        this.ang = 0;
         localStorage.setItem('status', 'won');
         localStorage.setItem('coins', this.coinsNum);
     }
@@ -49,7 +52,6 @@ export default class Coins {
         }
 
         this.add(scene);
-    
     }
 
     add(scene) {
@@ -57,6 +59,14 @@ export default class Coins {
         for (let i=0;i<this.coins.length;i++) {
             scene.addNode(this.coins[i]);       
         }
+    }
+
+    update(){
+        console.log(this.coins);
+        this.ang = 0.01;
+        this.coins.forEach(coin => {
+            coin.rotation = quat.rotateZ(coin.rotation, coin.rotation, this.ang);
+        });
     }
 
     collisionCoins(object, scene) {
@@ -96,4 +106,5 @@ export default class Coins {
         }
         return collided;
     }
+
 }
