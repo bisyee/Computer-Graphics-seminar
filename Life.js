@@ -1,20 +1,17 @@
-import  {Light}  from "./Light.js";
 
+var width = 0;
 export default class Life{
     constructor() {
-        this.width = 1;
-        this.light = new Light();
+        this.width = 0;
       }
     subLife(){
         var elem = document.getElementById("lifeBar");
-        this.light.turnOff();
-        if (this.width >= 100) {
+        if (width >= 100) {
             localStorage.setItem('status','lost')
             location.href='./end.html'
-           
         } else {
-            this.width+=10;
-            elem.style.width = this.width + "%";
+            width+=10;
+            elem.style.width = width + "%";
         }
     }
 }

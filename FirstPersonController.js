@@ -1,22 +1,23 @@
 
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Barrier from './Barrier.js';
-import Meteors from './Meteors.js';
 import Nitro from './Nitro.js';
+import Life from './Life.js';
 import AirSpeed from './AirSpeed.js';
+
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
         this.camera=camera;
         this.node = node;
         this.domElement = domElement;
-
+        
         this.keys = {};
         this.nitro = new Nitro();
         this.nitroAllow = true;
 
         this.bar = new Barrier();
-
+        this.life = new Life();
         this.pitch = 1.7;
         this.yaw = -9.8;
 
@@ -111,6 +112,7 @@ export class FirstPersonController {
         if(this.node.translation[0] >330 && this.node.translation[0]<475 &&  this.node.translation[2] > 330  &&  this.node.translation[2] <455 ){
             vec3.negate(this.velocity, this.velocity);
             vec3.scale(this.velocity, this.velocity, 1);
+            this.life.subLife();
         }
        
         
@@ -126,6 +128,7 @@ export class FirstPersonController {
             vec3.scale(this.velocity, this.velocity, 1);
         }
         
+
 
         // If there is no user input, apply decay.
         if (!this.keys['KeyW'] &&

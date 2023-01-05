@@ -18,8 +18,10 @@ export  class Light extends Node {
 
         Object.assign(this, Light.Light_ON);
     }
+
     turnOn() {
         Object.assign(this, Light.Light_ON);
 
     }
+
 }
