@@ -37,6 +37,8 @@ uniform vec4 uBaseColorFactor;
 uniform vec3 uAmbientColor;
 uniform vec3 uDiffuseColor;
 uniform vec3 uSpecularColor;
+uniform int  uAnimated;
+uniform float uChange;
 
 uniform float uShininess;
 
@@ -58,12 +60,16 @@ void main() {
 
     vec3 ambient = uAmbientColor;
     vec3 specular = uSpecularColor * phong;
-
     vec3 light = (ambient + specular) * vAttenuation;
     vec4 baseColor = texture(uBaseColorTexture, vTexCoord);
-    oColor = uBaseColorFactor * vec4(light, 1) * baseColor;
-   
-   
+    if(uAnimated == 0){
+        oColor = uBaseColorFactor * vec4(light, 1) * baseColor;
+    }
+    else{
+        float change = 0.4*abs(sin(uChange))*1.0;
+        vec4 col = vec4(0, 50, 255, 1);
+        oColor = mix(uBaseColorFactor * vec4(light, 1) * baseColor, col,change* 0.001);
+    }
 }
 `;
 

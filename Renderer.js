@@ -188,7 +188,7 @@ export class Renderer {
 
     render(scene, camera, light) {
         const gl = this.gl;
-
+        const t = Date.now();
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         
@@ -218,7 +218,7 @@ export class Renderer {
 
         for (const node of scene.nodes) {
     
-            this.renderNode(node, mvpMatrix);
+            this.renderNode(node, mvpMatrix,t);
         }
     }
 
@@ -230,7 +230,16 @@ export class Renderer {
 
         if (node.mesh) {
             const program = this.programs.phong;
+            if(node.isAnimated){
+                gl.uniform1i(program.uniforms.uAnimated, 1);
+            }
+            else {
+                gl.uniform1i(program.uniforms.uAnimated, 0);
+            }
+            
+            const change = Math.cos(t);
 
+            gl.uniform1f(program.uniforms.uChange, change);
             gl.uniformMatrix4fv(program.uniforms.uMvpMatrix, false, mvpMatrix);
             for (const primitive of node.mesh.primitives) {
                 this.renderPrimitive(primitive);
@@ -238,7 +247,7 @@ export class Renderer {
         }
 
         for (const child of node.children) {
-            this.renderNode(child, mvpMatrix);
+            this.renderNode(child, mvpMatrix, t);
         }
     }
 
