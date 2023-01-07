@@ -25,14 +25,10 @@ const quat = glMatrix.quat;
 var mus = document.getElementById("music");
  
 
-function playAudio() {
+function playAudio(mus) {
     //mus.currentTime = 0;
     mus.volume = 0.2;
     mus.play();
-}
-
-function pauseAudio() {
-    mus.pause();
 }
 
 class App extends Application {
@@ -94,8 +90,7 @@ class App extends Application {
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
 
-        playAudio();
-        
+        playAudio(document.getElementById("music"));
     }
 
     render() {
@@ -106,6 +101,7 @@ class App extends Application {
         this.camera.camera.aspect = width / height;
         this.camera.camera.updateProjectionMatrix();
     }
+    
     update(time, dt){
         this.controller.update(dt);
         this.coins.update(dt);
@@ -121,7 +117,7 @@ class App extends Application {
         }
         if(collidedCoins){
             this.checkpoints +=1;
-           
+           playAudio(document.getElementById("music2"));
         }
         
     }
