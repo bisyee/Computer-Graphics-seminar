@@ -1,22 +1,23 @@
 
 import { quat, vec3, mat4, vec4} from './lib/gl-matrix-module.js';
 import Barrier from './Barrier.js';
-import Meteors from './Meteors.js';
-import Nitro from './Nitro.js';
+import Turbo from './Turbo.js';
+import Life from './Life.js';
 import AirSpeed from './AirSpeed.js';
+
 export class FirstPersonController {
 
     constructor(node, domElement,camera) {
         this.camera=camera;
         this.node = node;
         this.domElement = domElement;
-
+        
         this.keys = {};
-        this.nitro = new Nitro();
-        this.nitroAllow = true;
+        this.turbo = new Turbo();
+        this.turboAllow = true;
 
         this.bar = new Barrier();
-
+        this.life = new Life();
         this.pitch = 1.7;
         this.yaw = -9.8;
 
@@ -51,7 +52,6 @@ export class FirstPersonController {
     }
 
     update(dt) {
-        
         // Calculate forward and right vectors.
         const cos = Math.cos(this.yaw);
         const sin = Math.sin(this.yaw);
@@ -95,21 +95,23 @@ export class FirstPersonController {
  
         }
 
-        if(this.keys['KeyC']){
-            var translation1 =  vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1], this.camera.translation[2]);
-            if(this.nitroAllow){
-                var id = setInterval(this.acceleration = 3000, 3000);
-                clearInterval(id);
-                
-                //Interval ne dela 
+        if(this.keys['KeyT']){
+            if(this.turboAllow){
+                    this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 0.5, this.camera.translation[2]);
+                    this.acceleration = 1500;
+                    this.turbo.subNitro();
             }
-            this.camera.translation = vec3.set(vec3.create(),translation1[0], translation1[1], translation1[2]);
-            this.nitro.subNitro();
+            this.camera.translation = vec3.set(vec3.create(),0, 3, 0);
             this.acceleration = 600;
-            this.nitroAllow = false;
+            this.turboAllow = false;
+        }
+        if(this.node.translation[0] >330 && this.node.translation[0]<475 &&  this.node.translation[2] > 330  &&  this.node.translation[2] <455 ){
+            vec3.negate(this.velocity, this.velocity);
+            vec3.scale(this.velocity, this.velocity, 1);
+            this.life.subLife();
         }
        
-     
+        
 
 
         // Update velocity based on acceleration.
@@ -122,7 +124,7 @@ export class FirstPersonController {
             vec3.scale(this.velocity, this.velocity, 1);
         }
         
-        
+
 
         // If there is no user input, apply decay.
         if (!this.keys['KeyW'] &&
@@ -152,6 +154,7 @@ export class FirstPersonController {
         quat.rotateX(rotation, rotation, this.pitch);
         this.node.rotation = rotation;
 
+        
         
         
     }

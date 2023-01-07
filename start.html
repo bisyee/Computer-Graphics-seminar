@@ -108,13 +108,14 @@ body, html {
     <a style="font-size:20px" onclick="location.href='./index.html'" type="button">Play game</a>
   </div>
 <div class="bg-text3">
-    <h1 style="font-size:20px">Controls: W, A, S, D </h1>
+    <h1 style="font-size:20px">Controls: W(forward), A(left), S(backwards), D(right) 
+    arrows(camera adjust),T(turbo)</h1>
    
   </div>
   <script>
     let topS = localStorage.getItem('top');
     var numC = document.getElementById('bg-text2');
-    console.log(topS);
+
     if (topS == null) {
       localStorage.setItem('top', 0);
     }

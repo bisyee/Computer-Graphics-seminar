@@ -136,6 +136,7 @@ body, html {
     let allC = localStorage.getItem('coins');
     var numC = document.getElementById('coins');
     document.getElementById('bg-text2').innerHTML = "<h1 style='font-size:20px'>Score:  " + allC + "</h1> "
+
     let a = allC * 4 / 20;
     a = parseInt(a, 10);
     for (let i = 0; i < a; i++) {
@@ -151,7 +152,7 @@ body, html {
     }
     let t = localStorage.getItem('top');
     if (t < allC) {
-      console.log(t);
+
       localStorage.setItem('top', allC);
     }
     

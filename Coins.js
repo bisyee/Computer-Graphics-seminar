@@ -62,7 +62,7 @@ export default class Coins {
     }
 
     update(){
-        console.log(this.coins);
+
         this.ang = 0.01;
         this.coins.forEach(coin => {
             coin.rotation = quat.rotateZ(coin.rotation, coin.rotation, this.ang);

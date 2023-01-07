@@ -1,5 +1,5 @@
-export default class Fuel {
 
+export default class Fuel {
     subFuel(){
         var elem = document.getElementById("myBar");
         var width = 1;
@@ -7,8 +7,8 @@ export default class Fuel {
         function frame() {
         if (width >= 100) {
             clearInterval(id);
-            localStorage.setItem('status','fuel')
-            location.href='./end.html'
+            localStorage.setItem('status','fuel');
+            location.href='./end.html';
         } else {
             width++;
             elem.style.width = width + "%";

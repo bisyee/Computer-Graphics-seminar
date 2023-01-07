@@ -12,7 +12,6 @@ import Fuel from './Fuel.js';
 import Life from './Life.js';
 
 import {Light} from './Light.js';
-import AirSpeed from './AirSpeed.js';
 
 
 
@@ -24,16 +23,12 @@ const vec3 = glMatrix.vec3;
 const quat = glMatrix.quat;
 
 var mus = document.getElementById("music");
+ 
 
-
-function playAudio() {
+function playAudio(mus) {
     //mus.currentTime = 0;
     mus.volume = 0.2;
     mus.play();
-}
-
-function pauseAudio() {
-    mus.pause();
 }
 
 class App extends Application {
@@ -49,11 +44,7 @@ class App extends Application {
         }
         if (!this.camera.camera) {
             throw new Error('Camera node does not contain a camera reference');
-        }   
-
-
-        // this.barrier = new Barrier();
-        // await this.barrier.build(this.loader);
+        } 
 
 
         this.coins = new Coins();
@@ -61,22 +52,12 @@ class App extends Application {
 
         this.meteors = new Meteors();
         await this.meteors.build(this.loader,  this.scene);
-
-        this.life = new Life(); 
-        // await this.loader.load('./blender/newmer1a.gltf');
         Object.assign(this.camera, { //2
-            translation     :vec3.set(vec3.create(), 0, 2, 0),
+            translation     :vec3.set(vec3.create(), 0, 3, 0),
             fov             : 1.5,
             maxFov          : 1.8,
             minFov          : 1,
             maxTranslation  : 7,
-            yaw             : 0,
-            pitch           : 0,
-            roll            : 0,
-            distanceFromPlane : 50,
-            zoom            : -20,
-            offset          : 0,
-            angle           : 0
         });
 
     
@@ -86,15 +67,6 @@ class App extends Application {
             rotation         : quat.fromEuler(quat.create(), 0, 0, 0),
             translation      : vec3.set(vec3.create(), -200, 400, 1000),
             velocity         : vec3.set(vec3.create(), 0, 0, 0),
-            mouseSensitivity : 0.002,
-            heading          : 0,
-            maxSpeed         : 3,
-            friction         : 0.04,
-            acceleration     : 0.2,
-            yaw              : 0,
-            pitch            : 0,
-            roll             : 0,
-            collided         : false
         });
         this.scene.addNode(this.plane);
         this.scene.addNode(this.camera);
@@ -107,7 +79,7 @@ class App extends Application {
         this.light = new Light();
         this.scene.addNode(this.light);
 
-
+        this.life = new Life();
        
         this.controller= new FirstPersonController(this.plane,this.gl.canvas,this.camera);
         this.time = performance.now();
@@ -118,8 +90,7 @@ class App extends Application {
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
 
-        playAudio();
-        
+        playAudio(document.getElementById("music"));
     }
 
     render() {
@@ -130,6 +101,7 @@ class App extends Application {
         this.camera.camera.aspect = width / height;
         this.camera.camera.updateProjectionMatrix();
     }
+    
     update(time, dt){
         this.controller.update(dt);
         this.coins.update(dt);
@@ -138,11 +110,6 @@ class App extends Application {
         let angles = this.getEuler(this.plane.rotation);
         var collided = this.meteors.collision(this.plane, angles);
         //console.log(this.plane.translation);
-        if(this.plane.translation[0] >330 && this.plane.translation[0]<475 &&  this.plane.translation[2] > 330  &&  this.plane.translation[2] <455 ){
-            this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 1, 400, this.plane.translation[2]);
-        }
-
-
                
         if (collided){
             this.plane.translation = vec3.set(vec3.create(), this.plane.translation[0] - 20, 400, this.plane.translation[2] - 20);
@@ -150,7 +117,7 @@ class App extends Application {
         }
         if(collidedCoins){
             this.checkpoints +=1;
-           
+           playAudio(document.getElementById("music2"));
         }
         
     }

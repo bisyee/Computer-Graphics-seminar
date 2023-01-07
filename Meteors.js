@@ -3,6 +3,7 @@ const vec3 = glMatrix.vec3;
 export default class Meteors {
      constructor() {   
         this.meteors = [];
+        this.animated = [];
     }
 
     async build(loader, scene) {
@@ -33,8 +34,11 @@ export default class Meteors {
             meteor.translation = vec3.set(vec3.create(), locat[i][0], 400, locat[i][1]);
             meteor.scale = vec3.set(vec3.create(), 20, 20, 10);
             this.meteors.push(meteor);
+            this.animated.push(meteor);
         }
-
+        for(const object of this.animated) {
+            object.isAnimated = true;
+        }
         this.add(scene);
     }
 
