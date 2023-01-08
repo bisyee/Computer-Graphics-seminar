@@ -70,11 +70,11 @@ export class FirstPersonController {
         }
         if (this.keys['KeyD']) {
             vec3.add(acc, acc, right);
-            this.yaw -=0.01;
+            this.yaw -=360 * dt * 0.003139865044;
         }
         if (this.keys['KeyA']) {
             vec3.sub(acc, acc, right);
-            this.yaw +=0.01;
+            this.yaw +=360 * dt * 0.003139865044;
         }
         if(this.keys['ArrowDown']){
             this.camera.translation = vec3.set(vec3.create(),this.camera.translation[0], this.camera.translation[1] + 360 * dt * 0.003139865044, this.camera.translation[2]);
